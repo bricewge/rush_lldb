@@ -1,0 +1,16 @@
+#breakpoint set --name main
+#proces launch
+
+b 13
+c
+c
+expr tab[0] = tab[1]
+c
+expr int $tmp = tab[1]
+b 16
+c
+expr tab[2] = tab[1]
+expr tab[1] = $tmp
+
+expr count = 0
+c -i 2

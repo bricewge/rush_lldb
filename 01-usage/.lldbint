@@ -1,8 +1,0 @@
-breakpoint set --name main
-platform shell echo '1\\n2\\n3\\n\\c' \> tmp-input
-settings set target.input-path "tmp-input"
-settings set target.output-path "tmp-output"
-process launch
-command source -c false -- commandes
-platform shell cat tmp-output
-platform shell rm tmp-input tmp-output

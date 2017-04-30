@@ -1,16 +1,36 @@
-#breakpoint set --name main
-#proces launch
+breakpoint set --name main
+platform shell touch tmp-output
+settings set target.input-path "tmp-input"
+settings set target.output-path "tmp-output"
+process launch
 
-b 13
-c
-c
+breakpoint set -l 13
+process continue
+process continue
 expr tab[0] = tab[1]
-c
+process continue
 expr int $tmp = tab[1]
-b 16
-c
+breakpoint set -l 16
+process continue
 expr tab[2] = tab[1]
 expr tab[1] = $tmp
 
 expr count = 0
-c -i 2
+
+###
+
+breakpoint set -l 28
+process continue
+process continue
+process continue
+expr tmp = min[0] + min[1] + min[2]
+breakpoint set -l 35
+process continue
+thread step-in
+expr i = 0
+process continue
+process continue
+process continue
+
+###
+platform shell cat tmp-output

@@ -1,9 +1,3 @@
-breakpoint set --name main
-platform shell touch tmp-output
-settings set target.input-path "tmp-input"
-settings set target.output-path "tmp-output"
-process launch
-
 breakpoint set -l 13
 process continue
 process continue
@@ -14,23 +8,14 @@ breakpoint set -l 16
 process continue
 expr tab[2] = tab[1]
 expr tab[1] = $tmp
-
 expr count = 0
-
-###
-
-breakpoint set -l 28
+breakpoint set -l 27
 process continue
 process continue
 process continue
 expr tmp = min[0] + min[1] + min[2]
-breakpoint set -l 35
+breakpoint set -l 37
 process continue
-thread step-in
-expr i = 0
+expr int $cdt = (min[1] > min[2] ? min[1] : min[2])
+expr biggest = (biggest > $cdt ? biggest : $cdt)
 process continue
-process continue
-process continue
-
-###
-platform shell cat tmp-output

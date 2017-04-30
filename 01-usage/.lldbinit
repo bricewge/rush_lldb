@@ -1,0 +1,7 @@
+breakpoint set --name main
+platform shell touch tmp-output
+settings set target.input-path "tmp-input"
+settings set target.output-path "tmp-output"
+process launch
+command source -c false -- commandes
+platform shell cat tmp-output
